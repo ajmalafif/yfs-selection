@@ -346,4 +346,13 @@ body {
   flex-direction: column;
 }
 
+.selected2 {
+  position: absolute;
+  top: -7px;
+  left: -3px;
+  width: 60px;
+  height: 100px;
+  visibility: visible;
+}
+
 /*# sourceMappingURL=style.css.map */
