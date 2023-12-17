@@ -1,3 +1,19 @@
+// Step 1: Create a dictionary of character ids and names
+const characterNames = {
+  "grid-ryu": "Ryu",
+  "grid-honda": "E. Honda",
+  "grid-blanka": "Blanka",
+  "grid-guile": "Guile",
+  "grid-balrog": "Balrog",
+  "grid-vega": "Vega",
+  "grid-ken": "Ken",
+  "grid-chunli": "Chun-Li",
+  "grid-zangief": "Zangief",
+  "grid-dhalsim": "Dhalsim",
+  "grid-sagat": "Sagat",
+  "grid-bison": "M. Bison",
+};
+
 // Grab img element that display the character selected on the left
 // It is going to be used to dynamically change the img.src to the character selected by the grid
 const charSelected = document.getElementById("char-selected");
@@ -29,6 +45,18 @@ function dynamicChange() {
   const flagSelectedClass = document.querySelector(".flag-selected");
   // Then remove it
   flagSelectedClass.classList.remove("flag-selected");
+
+  // Get the character id from image.previousSibling.id
+  const characterId = image.previousSibling.id;
+
+  // Use this character id to look up the character name in the characterNames map
+  const characterName = characterNames[characterId];
+
+  // Select the HTML element where you want to display the character name
+  const characterNameElement = document.getElementById("character-name");
+
+  // Update the text content of this element with the character name
+  characterNameElement.textContent = characterName;
 
   // :: CreateStringForFlagClass ::
   // Create a string with the classname we need to change the flag of the selected char in the grid selection

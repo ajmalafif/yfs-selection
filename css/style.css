@@ -337,4 +337,13 @@ body {
   }
 }
 
+#character-name {
+  color: #fff;
+}
+
+.player-1 {
+  display: flex;
+  flex-direction: column;
+}
+
 /*# sourceMappingURL=style.css.map */
