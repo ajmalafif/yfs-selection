@@ -36,6 +36,8 @@ let topOrBottom2 = "bottom";
 
 function dynamicChange() {
   new Audio("sound/move-grid.mp3").play();
+  const charSelected = document.getElementById("char-selected");
+  charSelected.src = squares[position].querySelector("img").src;
 
   // :: CreateSelectedSquare ::
   // Creates selected "1p" square and move to the position
@@ -44,12 +46,6 @@ function dynamicChange() {
   image.src = "images/selected.png";
   image.classList.add("selected");
   squares[position].appendChild(image);
-
-  // :: DeletePreviousFlagSelected ::
-  // Grab the element with the class ".flag-selected"
-  const flagSelectedClass = document.querySelector(".flag-selected");
-  // Then remove it
-  flagSelectedClass.classList.remove("flag-selected");
 
   // Get the character id from image.previousSibling.id
   const characterId = image.previousSibling.id;
@@ -112,18 +108,14 @@ function dynamicChange() {
 // ========================================
 function dynamicChange2() {
   new Audio("sound/move-grid.mp3").play();
+  const charSelected2 = document.getElementById("char-selected2");
+  charSelected2.src = squares[position2].querySelector("img").src;
 
   // Create selected "2p" square and move to the position
   const image = document.createElement("img");
   image.src = "images/player-2.png"; // Use the image for player 2
   image.classList.add("selected2"); // Use a different class for player 2
   squares[position2].appendChild(image);
-
-  // Remove the previous flag-selected
-  const flagSelectedClass = document.querySelector(".flag-selected");
-  if (flagSelectedClass) {
-    flagSelectedClass.classList.remove("flag-selected");
-  }
 
   // Get the character id from image.previousSibling.id
   const characterId = image.previousSibling.id;
@@ -210,16 +202,10 @@ document.addEventListener("keydown", (x) => {
   // Character selection
   if (x.key == "Enter") {
     // Player 1 has selected a character
-    const characterId = squares[position].firstChild.id;
-    const characterImage = squares[position].firstChild.src;
-    document.getElementById("char-selected").src = characterImage;
-    displaySelectedCharacters();
+    new Audio("sound/selected_sf2.mp3").play();
   } else if (x.key == " ") {
     // Player 2 has selected a character
-    const characterId = squares[position2].firstChild.id;
-    const characterImage = squares[position2].firstChild.src;
-    document.getElementById("char-selected2").src = characterImage;
-    displaySelectedCharacters();
+    new Audio("sound/selected_sf2.mp3").play();
   }
 });
 
