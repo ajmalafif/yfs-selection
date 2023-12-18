@@ -1,17 +1,20 @@
+let player1Characters = [];
+let player2Characters = [];
+
 // Step 1: Create a dictionary of character ids and names
 const characterNames = {
-  "grid-ryu": "Ryu",
-  "grid-honda": "E. Honda",
-  "grid-blanka": "Blanka",
-  "grid-guile": "Guile",
-  "grid-balrog": "Balrog",
-  "grid-vega": "Vega",
-  "grid-ken": "Ken",
-  "grid-chunli": "Chun-Li",
-  "grid-zangief": "Zangief",
-  "grid-dhalsim": "Dhalsim",
-  "grid-sagat": "Sagat",
-  "grid-bison": "M. Bison",
+  "grid-ryu": "Sak - Cambodia",
+  "grid-honda": "Chinny – Hong Kong",
+  "grid-blanka": "Jayana – India",
+  "grid-guile": "Dustyn - Indonesia",
+  "grid-balrog": "Kenzo - Japan",
+  "grid-vega": "Lily – Japan",
+  "grid-ken": "Thames - Thailand",
+  "grid-chunli": "Saachi – Singapore",
+  "grid-zangief": "Dexter – Singapore",
+  "grid-dhalsim": "Aldrich – Philippines",
+  "grid-sagat": "Amina - Kazakhstan",
+  "grid-bison": "Amirah - Malaysia",
 };
 
 // Grab img element that display the character selected on the left
@@ -23,14 +26,18 @@ const squares = document.querySelectorAll(".squares");
 
 // We need this to make thr grid move, to know where the selected square is at;
 let position = 0;
+let position2 = 11;
 
 // We need this to know if we are at the top or bottom of the selection grid
 let topOrBottom = "top";
+let topOrBottom2 = "bottom";
 
 // ========================================
 
 function dynamicChange() {
   new Audio("sound/move-grid.mp3").play();
+  const charSelected = document.getElementById("char-selected");
+  charSelected.src = squares[position].querySelector("img").src;
 
   // :: CreateSelectedSquare ::
   // Creates selected "1p" square and move to the position
@@ -40,23 +47,19 @@ function dynamicChange() {
   image.classList.add("selected");
   squares[position].appendChild(image);
 
-  // :: DeletePreviousFlagSelected ::
-  // Grab the element with the class ".flag-selected"
-  const flagSelectedClass = document.querySelector(".flag-selected");
-  // Then remove it
-  flagSelectedClass.classList.remove("flag-selected");
-
   // Get the character id from image.previousSibling.id
   const characterId = image.previousSibling.id;
 
-  // Use this character id to look up the character name in the characterNames map
+  // Get the character name
   const characterName = characterNames[characterId];
 
-  // Select the HTML element where you want to display the character name
-  const characterNameElement = document.getElementById("character-name");
+  // Select the HTML element where you want to display the selected character
+  const selectedCharacterElement1 = document.getElementById(
+    "selected-characters1"
+  );
 
   // Update the text content of this element with the character name
-  characterNameElement.textContent = characterName;
+  selectedCharacterElement1.textContent = characterName;
 
   // :: CreateStringForFlagClass ::
   // Create a string with the classname we need to change the flag of the selected char in the grid selection
@@ -105,75 +108,137 @@ function dynamicChange() {
 }
 
 // ========================================
+function dynamicChange2() {
+  new Audio("sound/move-grid.mp3").play();
+  const charSelected2 = document.getElementById("char-selected2");
+  charSelected2.src = squares[position2].querySelector("img").src;
+
+  // Create selected "2p" square and move to the position
+  const image = document.createElement("img");
+  image.src = "images/player-2.png"; // Use the image for player 2
+  image.classList.add("selected2"); // Use a different class for player 2
+  squares[position2].appendChild(image);
+
+  // Get the character id from image.previousSibling.id
+  const characterId = image.previousSibling.id;
+
+  // Get the character name
+  const characterName = characterNames[characterId];
+
+  // Select the HTML element where you want to display the selected character
+  const selectedCharacterElement2 = document.getElementById(
+    "selected-characters2"
+  );
+
+  // Update the text content of this element with the character name
+  selectedCharacterElement2.textContent = characterName;
+}
+
+// ========================================
 
 document.addEventListener("keydown", (x) => {
-  if (x.key == "l" || x.keyCode == "39") {
-    if (position == 5) {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position = 0;
-      charSelected.src = "images/char-ryu.png";
-      dynamicChange();
-      return;
-    }
-
-    if (position == 11) {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position = 6;
-      charSelected.src = "images/char-ken.png";
-      dynamicChange();
-      return;
-    }
-
+  // Player 1 controls
+  if (x.key == "d") {
+    // Move right
     squares[position].removeChild(document.querySelector(".selected"));
-
-    position++;
+    position = ((position + 1) % 6) + Math.floor(position / 6) * 6;
     dynamicChange();
   }
 
-  if (x.key == "h" || x.keyCode == "37") {
-    if (position == 0) {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position = 5;
-      charSelected.src = "images/char-vega.png";
-      dynamicChange();
-      return;
-    }
-
-    if (position == 6) {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position = 11;
-      charSelected.src = "images/char-bison.png";
-      dynamicChange();
-      return;
-    }
-
+  if (x.key == "a") {
+    // Move left
     squares[position].removeChild(document.querySelector(".selected"));
-    position--;
-
+    position = ((position + 5) % 6) + Math.floor(position / 6) * 6;
     dynamicChange();
   }
 
-  if (x.key == "j" || x.key == "k" || x.keyCode == 38 || x.keyCode == "40") {
-    if (topOrBottom == "top") {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position += 6;
-      dynamicChange();
-      topOrBottom = "bottom";
-      return;
-    }
-    if (topOrBottom == "bottom") {
-      squares[position].removeChild(document.querySelector(".selected"));
-      position -= 6;
-      dynamicChange();
-      topOrBottom = "top";
-      return;
+  if (x.key == "s") {
+    // Move down
+    squares[position].removeChild(document.querySelector(".selected"));
+    position = (position + 6) % 12;
+    dynamicChange();
+  }
+
+  if (x.key == "w") {
+    // Move up
+    squares[position].removeChild(document.querySelector(".selected"));
+    position = (position + 6) % 12;
+    dynamicChange();
+  }
+
+  // Player 2 controls
+  if (x.key == "ArrowRight") {
+    // Move right
+    if (position2 % 6 !== 5) {
+      squares[position2].removeChild(document.querySelector(".selected2"));
+      position2 += 1;
+      dynamicChange2();
     }
   }
 
-  if (x.key == "Enter" || x.keyCode == 32) {
+  if (x.key == "ArrowLeft") {
+    // Move left
+    if (position2 % 6 !== 0) {
+      squares[position2].removeChild(document.querySelector(".selected2"));
+      position2 -= 1;
+      dynamicChange2();
+    }
+  }
+
+  if (x.key == "ArrowUp") {
+    // Move up
+    if (position2 > 5) {
+      squares[position2].removeChild(document.querySelector(".selected2"));
+      position2 -= 6;
+      dynamicChange2();
+    }
+  }
+
+  if (x.key == "ArrowDown") {
+    // Move down
+    if (position2 < 6) {
+      squares[position2].removeChild(document.querySelector(".selected2"));
+      position2 += 6;
+      dynamicChange2();
+    }
+  }
+
+  // Character selection
+  if (x.key == "Enter") {
+    // Player 1 has selected a character
+    new Audio("sound/p2_selected.mp3").play();
+  } else if (x.key == " ") {
+    // Player 2 has selected a character
     new Audio("sound/selected_sf2.mp3").play();
   }
 });
+
+// ==========================
+function displaySelectedCharacters() {
+  // Select the HTML elements where you want to display the selected characters
+  const selectedCharactersElement1 = document.getElementById(
+    "selected-characters1"
+  );
+  const selectedCharactersElement2 = document.getElementById(
+    "selected-characters2"
+  );
+
+  // Clear the current display of selected characters
+  selectedCharactersElement1.innerHTML = "";
+  selectedCharactersElement2.innerHTML = "";
+
+  // Display the selected characters for player 1
+  for (const characterId of player1Characters) {
+    const characterName = characterNames[characterId];
+    selectedCharactersElement1.innerHTML += `<p>${characterName}</p>`;
+  }
+
+  // Display the selected characters for player 2
+  for (const characterId of player2Characters) {
+    const characterName = characterNames[characterId];
+    selectedCharactersElement2.innerHTML += `<p>${characterName}</p>`;
+  }
+}
 
 // ==========================
 // Toggle volume button
