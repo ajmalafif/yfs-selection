@@ -6,20 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Street Fighter 2 Selection Screen Clone</title>
+    <title>YFS mini-game character selector</title>
   </head>
   <body> 
     <script src="script.js" defer></script>
     <audio id="audio" loop autoplay>
-      <source src="sound/background-music.mp3" type="audio/mpeg">
+      <source src="sound/background-music.mp3" type="audio/mpeg" loop autoplay>
     </audio><i class="fas fa-volume-up" id="volumeBtn"></i>
     <div class="container">
-      <div class="row2">
+      <h1 class="title">YFS Random Ambassadors</h1>
+      <div class="grid">
         <div class="player-1">
-          <img id="char-selected" src="images/char-ryu.png" alt=""/>
-          <div id="selected-characters1"></div>
+          <h2 id="selected-characters1">Sak - Cambodia</h2>
+            <div class="p1-avatar"><img id="char-selected" src="images/char-grid-ryu.png" alt=""/></div>
+          <div style="text-align: right">
+            <h3>Use WASD keys <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></h3>
+            <br />
+            <h3>Press <kbd>Spacebar</kbd> to select player 1.</h3>
+          </div>
         </div>
         <div class="char-grid">
+          <marquee truespeed="100" class="footer">Select your founder</marquee>
           <div class="char-grid__row1">
             <div class="squares square1"> <img class="characters" id="grid-ryu" src="images/char-grid-ryu.png"><img class="selected" src="images/selected.png"></div>
             <div class="squares square2"><img class="characters" id="grid-honda" src="images/char-grid-honda.png"></div>
@@ -36,17 +43,18 @@
             <div class="squares square11"><img class="characters" id="grid-sagat" src="images/char-grid-sagat.png"></div>
             <div class="squares square12"><img class="characters" id="grid-bison" src="images/char-grid-bison.png"><img class="selected2" src="images/player-2.png"></div>
           </div>
-          <div class="player-2">
-            <img id="char-selected2" src="images/char-bison.png" alt=""/>
-            <div id="selected-characters2"></div>
+        </div>
+        <div class="player-2">
+          <h2 id="selected-characters2">Amirah - Malaysia</h2>
+          <div><img id="char-selected2" src="images/char-grid-bison.png" alt="" alt=""/></div>
+          <div>
+            <h3>Use arrow keys <kbd>←</kbd><kbd>↓</kbd><kbd>↑</kbd><kbd>→</kbd></h3>
+            <br/>
+            <h3>Press <kbd>Enter</kbd> to select player 2.</h3>
           </div>
-        </div><img id="char-selected-hidden" src="images/char-ken.png" alt="">
+        </div>
       </div>
-      <ul class="instructions">
-        <li>Use WASD keys <span class="keys">(W A S D) </span>for player 1.</li>
-        <li>Use arrow keys  <span class="keys">(←↓↑→) for player 2. </span></li>
-        <li>Press <span class="key">Enter </span>or <span class="key">Space </span>to select the characters</li>
-      </ul>
+
     </div>
   </body>
 </html>

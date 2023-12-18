@@ -3,18 +3,18 @@ let player2Characters = [];
 
 // Step 1: Create a dictionary of character ids and names
 const characterNames = {
-  "grid-ryu": "Ryu",
-  "grid-honda": "E. Honda",
-  "grid-blanka": "Blanka",
-  "grid-guile": "Guile",
-  "grid-balrog": "Balrog",
-  "grid-vega": "Vega",
-  "grid-ken": "Ken",
-  "grid-chunli": "Chun-Li",
-  "grid-zangief": "Zangief",
-  "grid-dhalsim": "Dhalsim",
-  "grid-sagat": "Sagat",
-  "grid-bison": "M. Bison",
+  "grid-ryu": "Sak - Cambodia",
+  "grid-honda": "Chinny – Hong Kong",
+  "grid-blanka": "Jayana – India",
+  "grid-guile": "Dustyn - Indonesia",
+  "grid-balrog": "Kenzo - Japan",
+  "grid-vega": "Lily – Japan",
+  "grid-ken": "Thames - Thailand",
+  "grid-chunli": "Saachi – Singapore",
+  "grid-zangief": "Dexter – Singapore",
+  "grid-dhalsim": "Aldrich – Philippines",
+  "grid-sagat": "Amina - Kazakhstan",
+  "grid-bison": "Amirah - Malaysia",
 };
 
 // Grab img element that display the character selected on the left
@@ -50,14 +50,16 @@ function dynamicChange() {
   // Get the character id from image.previousSibling.id
   const characterId = image.previousSibling.id;
 
-  // Use this character id to look up the character name in the characterNames map
+  // Get the character name
   const characterName = characterNames[characterId];
 
-  // Select the HTML element where you want to display the character name
-  const characterNameElement = document.getElementById("character-name");
+  // Select the HTML element where you want to display the selected character
+  const selectedCharacterElement1 = document.getElementById(
+    "selected-characters1"
+  );
 
   // Update the text content of this element with the character name
-  characterNameElement.textContent = characterName;
+  selectedCharacterElement1.textContent = characterName;
 
   // :: CreateStringForFlagClass ::
   // Create a string with the classname we need to change the flag of the selected char in the grid selection
@@ -120,14 +122,16 @@ function dynamicChange2() {
   // Get the character id from image.previousSibling.id
   const characterId = image.previousSibling.id;
 
-  // Use this character id to look up the character name in the characterNames map
+  // Get the character name
   const characterName = characterNames[characterId];
 
-  // Select the HTML element where you want to display the character name
-  const characterNameElement = document.getElementById("character-name2"); // Use a different id for player 2
+  // Select the HTML element where you want to display the selected character
+  const selectedCharacterElement2 = document.getElementById(
+    "selected-characters2"
+  );
 
   // Update the text content of this element with the character name
-  characterNameElement.textContent = characterName;
+  selectedCharacterElement2.textContent = characterName;
 }
 
 // ========================================
@@ -202,29 +206,10 @@ document.addEventListener("keydown", (x) => {
   // Character selection
   if (x.key == "Enter") {
     // Player 1 has selected a character
-    new Audio("sound/selected_sf2.mp3").play();
+    new Audio("sound/p2_selected.mp3").play();
   } else if (x.key == " ") {
     // Player 2 has selected a character
     new Audio("sound/selected_sf2.mp3").play();
-  }
-});
-
-// ==========================
-// Toggle volume button
-
-const volumeBtn = document.getElementById("volumeBtn");
-const audio = document.getElementById("audio");
-
-volumeBtn.addEventListener("click", (x) => {
-  volumeBtn.classList.toggle("fa-volume-up");
-  volumeBtn.classList.toggle("fa-volume-mute");
-
-  if (audio.muted == false) {
-    audio.muted = true;
-    return;
-  }
-  if (audio.muted == true) {
-    audio.muted = false;
   }
 });
 
@@ -254,3 +239,22 @@ function displaySelectedCharacters() {
     selectedCharactersElement2.innerHTML += `<p>${characterName}</p>`;
   }
 }
+
+// ==========================
+// Toggle volume button
+
+const volumeBtn = document.getElementById("volumeBtn");
+const audio = document.getElementById("audio");
+
+volumeBtn.addEventListener("click", (x) => {
+  volumeBtn.classList.toggle("fa-volume-up");
+  volumeBtn.classList.toggle("fa-volume-mute");
+
+  if (audio.muted == false) {
+    audio.muted = true;
+    return;
+  }
+  if (audio.muted == true) {
+    audio.muted = false;
+  }
+});
